@@ -36,4 +36,19 @@ public class ConfigurationSingletonTest {
         assertThat(orderService.getMemberRepository()).isSameAs(memberRepository);
 
     }
+    
+    @Test
+    void configurationDeep(){
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        AppConfig bean = ac.getBean(AppConfig.class);
+        System.out.println("bean.getClass() = " + bean.getClass());
+        // bean.getClass() = class hello.core.AppConfig$$EnhancerBySpringCGLIB$$6fd0acc1
+
+        // 순수한 클래스라면 다음과 같이 출력되어야 한다. class hello.core.AppConfig
+
+        // 내가 만든 AppConfig가 빈으로 등록되있는게 아니라
+        // AppConfig + 바이트 코드 조작된 AppConfig가 빈으로 등록 되어 있음.
+
+        // @Configuration을 붙이면 바이트코드를 조작하는 CGLIB 기술을 사용해서 싱글톤을 보장
+    }
 }
