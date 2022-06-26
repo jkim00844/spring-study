@@ -4,6 +4,7 @@ import static hello.jdbc.connection.ConnectionConst.PASSWORD;
 import static hello.jdbc.connection.ConnectionConst.URL;
 import static hello.jdbc.connection.ConnectionConst.USERNAME;
 
+import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -32,6 +33,19 @@ public class ConnectionTest {
         // 커넥션을 획득할 때는 단순히 dataSource.getConnection() 만 호출하면 된다.
         DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
         useDataSource(dataSource);
+    }
+
+    @Test
+    void dataSourceConnectionPool() throws SQLException, InterruptedException {
+        // 커넥션 풀링: HikariProxyConnection(Proxy) -> JdbcConnection(Target)
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(URL);
+        dataSource.setUsername(USERNAME);
+        dataSource.setPassword(PASSWORD);
+        dataSource.setMaximumPoolSize(10);
+        dataSource.setPoolName("MyPool");
+        useDataSource(dataSource);
+        Thread.sleep(1000); //커넥션 풀에서 커넥션 생성 시간 대기
     }
 
     private void useDataSource(DataSource dataSource) throws SQLException{
