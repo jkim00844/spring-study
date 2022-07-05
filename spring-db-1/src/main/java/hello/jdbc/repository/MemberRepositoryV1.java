@@ -1,4 +1,4 @@
-package hello.jdbc.Repository;
+package hello.jdbc.repository;
 
 import hello.jdbc.domain.Member;
 import java.sql.Connection;
@@ -9,20 +9,17 @@ import java.sql.Statement;
 import java.util.NoSuchElementException;
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.support.JdbcUtils;
 
 /**
- * 트랜잭션 - 트랜잭션 매니저
- * DataSourceUtils.getConnection()
- * DataSourceUtils.releaseConnection()
+ * JDBC - DataSource 사용, JdbcUtils 사용
  */
 @Slf4j
-public class MemberRepositoryV3 {
+public class MemberRepositoryV1 {
 
     private final DataSource dataSource;
 
-    public MemberRepositoryV3(DataSource dataSource) {
+    public MemberRepositoryV1(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -101,7 +98,6 @@ public class MemberRepositoryV3 {
         }
     }
 
-
     public void delete(String memberId) throws SQLException {
         String sql = "delete from member where member_id=?";
 
@@ -124,14 +120,12 @@ public class MemberRepositoryV3 {
     private void close(Connection con, Statement stmt, ResultSet rs){
         JdbcUtils.closeResultSet(rs);
         JdbcUtils.closeStatement(stmt);
-        // 주의! 트랜잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다.
-        DataSourceUtils.releaseConnection(con, dataSource);
+        JdbcUtils.closeConnection(con);
     }
 
     private Connection getConnection() throws SQLException {
-        // 주의! 트랜잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다.
-        Connection con = DataSourceUtils.getConnection(dataSource);
-        log.info("get connection={} class={}", con, con.getClass());
+        Connection con = dataSource. getConnection();
+        log.info("get connection={}, class={}", con, con.getClass());
         return con;
     }
 }

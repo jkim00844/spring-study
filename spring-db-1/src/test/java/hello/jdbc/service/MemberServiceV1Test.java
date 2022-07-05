@@ -5,9 +5,8 @@ import static hello.jdbc.connection.ConnectionConst.URL;
 import static hello.jdbc.connection.ConnectionConst.USERNAME;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
-import hello.jdbc.Repository.MemberRepositoryV1;
+import hello.jdbc.repository.MemberRepositoryV1;
 import hello.jdbc.domain.Member;
 import java.sql.SQLException;
 import org.junit.jupiter.api.AfterEach;

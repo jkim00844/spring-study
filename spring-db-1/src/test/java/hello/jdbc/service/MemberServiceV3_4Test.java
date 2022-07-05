@@ -1,12 +1,9 @@
 package hello.jdbc.service;
 
-import static hello.jdbc.connection.ConnectionConst.PASSWORD;
-import static hello.jdbc.connection.ConnectionConst.URL;
-import static hello.jdbc.connection.ConnectionConst.USERNAME;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import hello.jdbc.Repository.MemberRepositoryV3;
+import hello.jdbc.repository.MemberRepositoryV3;
 import hello.jdbc.domain.Member;
 import java.sql.SQLException;
 import javax.sql.DataSource;
@@ -20,9 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * 트랜잭션 - DataSource, TrasnactionManager 자동 등록

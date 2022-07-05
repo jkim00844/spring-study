@@ -1,6 +1,6 @@
 package hello.jdbc.service;
 
-import hello.jdbc.Repository.MemberRepositoryV2;
+import hello.jdbc.repository.MemberRepositoryV2;
 import hello.jdbc.domain.Member;
 import java.sql.Connection;
 import java.sql.SQLException;

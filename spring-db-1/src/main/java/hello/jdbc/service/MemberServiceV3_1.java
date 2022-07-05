@@ -1,11 +1,9 @@
 package hello.jdbc.service;
 
-import hello.jdbc.Repository.MemberRepositoryV2;
-import hello.jdbc.Repository.MemberRepositoryV3;
+import hello.jdbc.repository.MemberRepositoryV3;
 import hello.jdbc.domain.Member;
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.PlatformTransactionManager;
